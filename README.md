@@ -1,2 +1,2 @@
 # modelagem-tatica-test-store
-Modelagem tática de aplicação para o curso de Modelagem de domínios ricos
+Modelagem tática de aplicação para o curso de modelagem de domínios ricos
