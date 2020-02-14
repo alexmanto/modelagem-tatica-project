@@ -108,7 +108,20 @@ namespace ProjectStore.Catalogo.Domain.Tests
 
         public class AlterarCategoria
         {
+            [Fact]
+            public void Validar_Alteracao_Categoria()
+            {
+                var produto = new Produto(NOME, DESCRICAO, true, 100, DATA_CADASTRO, IMAGEM, CATEGORIA_ID, new Dimensoes(1, 1, 1));
+                var categoria = new Categoria(NOME, 2);
 
+                Assert.NotEqual(CATEGORIA_ID, categoria.Id);
+
+                produto.AlterarCategoria(categoria);
+
+                Assert.Equal(NOME, produto.Categoria.Nome);
+                Assert.Equal(2, produto.Categoria.Codigo);
+                Assert.Equal(categoria.Id, produto.Categoria.Id);
+            }
         }
 
         public class AlterarDescricao
@@ -137,17 +150,86 @@ namespace ProjectStore.Catalogo.Domain.Tests
 
         public class DebitarEstoque
         {
+            [Fact]
+            public void Validar_Debito_Estoque_Quantidade_Negativa()
+            {
+                var produto = new Produto(NOME, DESCRICAO, true, 100, DATA_CADASTRO, IMAGEM, CATEGORIA_ID, new Dimensoes(1, 1, 1));
+                produto.ReporEstoque(10);
+                produto.DebitarEstoque(4);
+                Assert.Equal(6, produto.QuantidadeEstoque);
+                produto.DebitarEstoque(-2);
+                Assert.Equal(4, produto.QuantidadeEstoque);
+            }
 
+            [Fact]
+            public void Validar_Debito_Estoque()
+            {
+                var produto = new Produto(NOME, DESCRICAO, true, 100, DATA_CADASTRO, IMAGEM, CATEGORIA_ID, new Dimensoes(1, 1, 1));
+                produto.ReporEstoque(10);
+                produto.DebitarEstoque(3);
+                Assert.Equal(7, produto.QuantidadeEstoque);
+                produto.DebitarEstoque(5);
+                Assert.Equal(2, produto.QuantidadeEstoque);
+            }
         }
 
         public class ReporEstoque
         {
+            [Fact]
+            public void Produto_Validar_Exceptions_Quantidade_Negativa()
+            {
+                var produto = new Produto(NOME, DESCRICAO, true, 100, DATA_CADASTRO, IMAGEM, CATEGORIA_ID, new Dimensoes(1, 1, 1));
+                produto.ReporEstoque(5);
 
+                var domainException = Assert.Throws<DomainException>(() =>
+                    produto.ReporEstoque(-2)
+                );
+
+                domainException = Assert.Throws<DomainException>(() =>
+                    produto.ReporEstoque(0)
+                );
+            }
+
+            [Fact]
+            public void Validar_Reposicao_Estoque()
+            {
+                var produto = new Produto(NOME, DESCRICAO, true, 100, DATA_CADASTRO, IMAGEM, CATEGORIA_ID, new Dimensoes(1, 1, 1));
+                produto.ReporEstoque(5);
+                Assert.Equal(5, produto.QuantidadeEstoque);
+                produto.ReporEstoque(3);
+                Assert.Equal(8, produto.QuantidadeEstoque);
+            }
         }
 
         public class PossuiEstoqueSuficiente
         {
+            [Fact]
+            public void Produto_Validar_Exceptions_Quantidade_Negativa()
+            {
+                var produto = new Produto(NOME, DESCRICAO, true, 100, DATA_CADASTRO, IMAGEM, CATEGORIA_ID, new Dimensoes(1, 1, 1));
+                produto.ReporEstoque(5);
 
+                var domainException = Assert.Throws<DomainException>(() =>
+                    produto.PossuiEstoqueSuficiente(-2)
+                );
+
+                domainException = Assert.Throws<DomainException>(() =>
+                    produto.PossuiEstoqueSuficiente(0)
+                );
+            }
+
+            [Fact]
+            public void Validar_Possui_Estoque_Suficiente()
+            {
+                var produto = new Produto(NOME, DESCRICAO, true, 100, DATA_CADASTRO, IMAGEM, CATEGORIA_ID, new Dimensoes(1, 1, 1));
+                produto.ReporEstoque(5);
+                var ret = produto.PossuiEstoqueSuficiente(2);
+                Assert.True(ret);
+                ret = produto.PossuiEstoqueSuficiente(8);
+                Assert.False(ret);
+                ret = produto.PossuiEstoqueSuficiente(5);
+                Assert.True(ret);
+            }
         }
 
         private IList<ValidationResult> GetDataAnnotationsErrors(object entity)

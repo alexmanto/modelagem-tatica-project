@@ -80,7 +80,7 @@ namespace TestStore.Catalogo.Domain
         public void ReporEstoque(int quantidade)
         {
             if (quantidade <= 0)
-                throw new Exception($"A {nameof(QuantidadeEstoque)} informada para repor estoque deve ser maior que zero.");
+                throw new DomainException($"A {nameof(QuantidadeEstoque)} informada para repor estoque deve ser maior que zero.");
 
             QuantidadeEstoque += quantidade;
         }
@@ -88,7 +88,7 @@ namespace TestStore.Catalogo.Domain
         public bool PossuiEstoqueSuficiente(int quantidade)
         {
             if (quantidade <= 0)
-                throw new Exception($"A {nameof(QuantidadeEstoque)} informada para repor estoque deve ser maior que zero.");
+                throw new DomainException($"A {nameof(QuantidadeEstoque)} informada para repor estoque deve ser maior que zero.");
 
             return QuantidadeEstoque >= quantidade;
         }
