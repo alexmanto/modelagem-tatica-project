@@ -14,10 +14,7 @@ namespace TestStore.Catalogo.Domain
 
         public ICollection<Produto> Produtos { get; set; }
 
-        protected Categoria()
-        {
-
-        }
+        protected Categoria() { }
 
         public Categoria(string nome, int codigo)
         {
