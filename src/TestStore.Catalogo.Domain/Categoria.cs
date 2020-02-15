@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 using TestStore.Core.DomainObjects;
 
 namespace TestStore.Catalogo.Domain
@@ -13,6 +11,13 @@ namespace TestStore.Catalogo.Domain
 
         [Required(ErrorMessage = "O código não pode ser nulo ou vazio.")]
         public int Codigo { get; private set; }
+
+        public ICollection<Produto> Produtos { get; set; }
+
+        protected Categoria()
+        {
+
+        }
 
         public Categoria(string nome, int codigo)
         {
