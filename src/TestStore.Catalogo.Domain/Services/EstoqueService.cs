@@ -1,4 +1,6 @@
-﻿using ProjectStore.Catalogo.Domain.Interfaces;
+﻿using ProjectStore.Catalogo.Domain.Events;
+using ProjectStore.Catalogo.Domain.Interfaces;
+using ProjectStore.Core.MediatorBus;
 using System;
 using System.Threading.Tasks;
 
@@ -8,9 +10,12 @@ namespace ProjectStore.Catalogo.Domain.Services
     {
         private readonly IProdutoRepository _produtoRepository;
 
-        public EstoqueService(IProdutoRepository produtoRepository)
+        private readonly IMediatrHandler _bus;
+
+        public EstoqueService(IProdutoRepository produtoRepository, IMediatrHandler bus)
         {
             _produtoRepository = produtoRepository;
+            _bus = bus;
         }
 
         public async Task<bool> DebitarEstoque(Guid produtoId, int quantidade)
@@ -20,6 +25,11 @@ namespace ProjectStore.Catalogo.Domain.Services
             if (!produto.PossuiEstoqueSuficiente(quantidade)) return false;
 
             produto.DebitarEstoque(quantidade);
+
+            //TODO: Teste de utilização do publish event
+            if (produto.QuantidadeEstoque < 10)
+                await _bus.PublishEvent(new ProdutoAbaixoEstoqueEvent(produto.Id, produto.QuantidadeEstoque));
+
             _produtoRepository.Update(produto);
             return await _produtoRepository.UnitOfWork.Commit();
         }
@@ -30,6 +40,7 @@ namespace ProjectStore.Catalogo.Domain.Services
             if (produto == null) return false;
 
             produto.ReporEstoque(quantidade);
+
             _produtoRepository.Update(produto);
             return await _produtoRepository.UnitOfWork.Commit();
         }
