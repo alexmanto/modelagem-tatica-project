@@ -6,7 +6,7 @@ namespace TestStore.Catalogo.Domain
 {
     public class Produto : Entity, IAggregateRoot
     {
-        [Required(ErrorMessage= "O nome não pode ser nulo ou vazio.")]
+        [Required(ErrorMessage = "O nome não pode ser nulo ou vazio.")]
         public string Nome { get; private set; }
 
         [Required(ErrorMessage = "A descricao não pode ser nula ou vazia.")]

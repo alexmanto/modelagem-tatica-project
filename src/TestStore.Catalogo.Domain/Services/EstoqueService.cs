@@ -50,4 +50,4 @@ namespace ProjectStore.Catalogo.Domain.Services
             _produtoRepository.Dispose();
         }
     }
-} 
+}

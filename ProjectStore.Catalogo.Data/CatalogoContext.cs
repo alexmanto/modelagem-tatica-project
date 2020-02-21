@@ -23,7 +23,7 @@ namespace ProjectStore.Catalogo.Data
             {
                 property.SetColumnType("varchar(100)");
             }
-            
+
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogoContext).Assembly);
         }
 
