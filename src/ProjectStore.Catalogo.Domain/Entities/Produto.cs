@@ -32,6 +32,11 @@ namespace TestStore.Catalogo.Domain
         [RegularExpression("^(?!(00000000-0000-0000-0000-000000000000)$)", ErrorMessage = "A categoria não pode ser nula ou vazia.")]
         public Guid CategoriaId { get; private set; }
 
+        protected Produto()
+        {
+
+        }
+
         public Produto(string nome, string descricao, bool ativo, decimal valor, DateTime dataCadastro, string imagem, Guid categoriaId, Dimensoes dimensoes)
         {
             if (string.IsNullOrEmpty(nome))

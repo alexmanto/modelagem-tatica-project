@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-ProjectStore.WebApp.MVC-3714EA31-ADED-48E0-A155-4876AF462C33</UserSecretsId>
+    <AssemblyName>ProjectStore.WebApp.MVC</AssemblyName>
+    <RootNamespace>ProjectStore.WebApp.MVC</RootNamespace>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="MediatR" Version="8.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectStore.Catalogo.Data\ProjectStore.Catalogo.Data.csproj" />
+    <ProjectReference Include="..\src\ProjectStore.Catalogo.Application\ProjectStore.Catalogo.Application.csproj" />
+    <ProjectReference Include="..\src\ProjectStore.Catalogo.Domain\ProjectStore.Catalogo.Domain.csproj" />
+    <ProjectReference Include="..\src\ProjectStore.Core\ProjectStore.Core.csproj" />
+  </ItemGroup>
+
+</Project>
