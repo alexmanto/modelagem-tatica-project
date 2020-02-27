@@ -29,7 +29,7 @@ namespace ProjectStore.Catalogo.Application.ViewModels
 
         public DimensoesDTO Dimensoes { get; private set; }
 
-        public IEnumerable<CategoriaDTO> Categoria { get; private set; }
+        public IEnumerable<CategoriaDTO> Categoria { get; set; }
 
         [Required]
         [RegularExpression("^(?!(00000000-0000-0000-0000-000000000000)$)", ErrorMessage = "A categoria não pode ser nula ou vazia.")]
