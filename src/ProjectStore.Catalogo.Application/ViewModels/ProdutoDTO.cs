@@ -9,30 +9,43 @@ namespace ProjectStore.Catalogo.Application.ViewModels
         [Key]
         public Guid Id { get; set; }
 
-        [Required(ErrorMessage = "O nome não pode ser nulo ou vazio.")]
-        public string Nome { get; private set; }
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        public Guid CategoriaId { get; set; }
 
-        [Required(ErrorMessage = "A descricao não pode ser nula ou vazia.")]
-        public string Descricao { get; private set; }
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        public string Nome { get; set; }
 
-        public bool Ativo { get; private set; }
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        public string Descricao { get; set; }
 
-        [Range(1, 9999999999999999.99, ErrorMessage = "O valor deve ser mais que zero.")]
-        public decimal Valor { get; private set; }
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        public bool Ativo { get; set; }
 
-        public DateTime DataCadastro { get; private set; }
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        public decimal Valor { get; set; }
 
-        [Required(ErrorMessage = "A image não pode ser nula ou vazia.")]
-        public string Imagem { get; private set; }
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        public DateTime DataCadastro { get; set; }
 
-        public int QuantidadeEstoque { get; private set; }
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        public string Imagem { get; set; }
 
-        public DimensoesDTO Dimensoes { get; private set; }
+        [Range(1, int.MaxValue, ErrorMessage = "O campo {0} precisa ter o valor mínimo de {1}")]
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        public int QuantidadeEstoque { get; set; }
+
+        [Range(1, int.MaxValue, ErrorMessage = "O campo {0} precisa ter o valor mínimo de {1}")]
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        public int Altura { get; set; }
+
+        [Range(1, int.MaxValue, ErrorMessage = "O campo {0} precisa ter o valor mínimo de {1}")]
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        public int Largura { get; set; }
+
+        [Range(1, int.MaxValue, ErrorMessage = "O campo {0} precisa ter o valor mínimo de {1}")]
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        public int Profundidade { get; set; }
 
         public IEnumerable<CategoriaDTO> Categoria { get; set; }
-
-        [Required]
-        [RegularExpression("^(?!(00000000-0000-0000-0000-000000000000)$)", ErrorMessage = "A categoria não pode ser nula ou vazia.")]
-        public Guid CategoriaId { get; private set; }
     }
 }
