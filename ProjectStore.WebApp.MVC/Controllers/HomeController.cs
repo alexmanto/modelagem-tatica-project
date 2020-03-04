@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ProjectStore.WebApp.MVC.Models;
 using System.Diagnostics;
-using TestStore.WebApp.MVC.Models;
 
-namespace TestStore.WebApp.MVC.Controllers
+namespace ProjectStore.WebApp.MVC.Controllers
 {
     public class HomeController : Controller
     {

@@ -9,10 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ProjectStore.Catalogo.Application.AutoMapper;
 using ProjectStore.Catalogo.Data;
+using ProjectStore.WebApp.MVC.Data;
 using ProjectStore.WebApp.MVC.Setup;
-using TestStore.WebApp.MVC.Data;
 
-namespace TestStore.WebApp.MVC
+namespace ProjectStore.WebApp.MVC
 {
     public class Startup
     {
@@ -70,7 +70,7 @@ namespace TestStore.WebApp.MVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Vitrine}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

@@ -1,4 +1,4 @@
-namespace TestStore.WebApp.MVC.Models
+namespace ProjectStore.WebApp.MVC.Models
 {
     public class ErrorViewModel
     {

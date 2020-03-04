@@ -18,7 +18,7 @@ namespace ProjectStore.Catalogo.Domain.Events
         {
             var produto = await _produtoRepository.GetById(message.AggregateId);
 
-            // TODO: Implementaçãodo evento do produto, por exemplo, enviar um email para compra de mais produtos.
+            // TODO: Implementação do evento do produto, por exemplo, enviar um email para compra de mais produtos.
         }
     }
 }
