@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace TestStore.Core.DomainObjects
+namespace ProjectStore.Core.DomainObjects
 {
     public class AssertionConcern
     {

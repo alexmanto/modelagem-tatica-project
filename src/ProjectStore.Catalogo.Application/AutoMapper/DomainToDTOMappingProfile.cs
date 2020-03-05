@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ProjectStore.Catalogo.Application.ViewModels;
-using TestStore.Catalogo.Domain;
+using ProjectStore.Catalogo.Domain;
 
 namespace ProjectStore.Catalogo.Application.AutoMapper
 {

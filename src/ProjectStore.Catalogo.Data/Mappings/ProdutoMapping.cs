@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TestStore.Catalogo.Domain;
+using ProjectStore.Catalogo.Domain;
 
 namespace ProjectStore.Catalogo.Data.Mappings
 {

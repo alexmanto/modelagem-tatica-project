@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using ProjectStore.Core.DomainObjects;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using TestStore.Core.DomainObjects;
 
-namespace TestStore.Catalogo.Domain
+namespace ProjectStore.Catalogo.Domain
 {
     public class Categoria : Entity
     {

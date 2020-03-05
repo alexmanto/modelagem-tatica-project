@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProjectStore.Catalogo.Domain;
 using ProjectStore.Catalogo.Domain.Interfaces;
 using ProjectStore.Core.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TestStore.Catalogo.Domain;
 
 namespace ProjectStore.Catalogo.Data.Repositories
 {

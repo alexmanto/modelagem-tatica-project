@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TestStore.Core.DomainObjects
+namespace ProjectStore.Core.DomainObjects
 {
     public abstract class Entity
     {

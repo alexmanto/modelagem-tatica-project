@@ -1,4 +1,4 @@
-﻿namespace TestStore.Core.DomainObjects
+﻿namespace ProjectStore.Core.DomainObjects
 {
     public interface IAggregateRoot
     {

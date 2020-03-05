@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TestStore.Catalogo.Domain
+namespace ProjectStore.Catalogo.Domain
 {
     public class Dimensoes
     {

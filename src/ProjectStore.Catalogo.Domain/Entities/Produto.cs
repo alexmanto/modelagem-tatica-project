@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ProjectStore.Core.DomainObjects;
+using System;
 using System.ComponentModel.DataAnnotations;
-using TestStore.Core.DomainObjects;
 
-namespace TestStore.Catalogo.Domain
+namespace ProjectStore.Catalogo.Domain
 {
     public class Produto : Entity, IAggregateRoot
     {

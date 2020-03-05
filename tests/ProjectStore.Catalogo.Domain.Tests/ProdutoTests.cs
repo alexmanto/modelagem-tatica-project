@@ -1,9 +1,8 @@
+using ProjectStore.Core.DomainObjects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using TestStore.Catalogo.Domain;
-using TestStore.Core.DomainObjects;
 using Xunit;
 
 namespace ProjectStore.Catalogo.Domain.Tests

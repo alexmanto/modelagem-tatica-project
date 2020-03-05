@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TestStore.Catalogo.Domain;
 
 namespace ProjectStore.Catalogo.Domain.Interfaces
 {

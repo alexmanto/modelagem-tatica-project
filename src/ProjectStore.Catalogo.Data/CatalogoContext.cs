@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProjectStore.Catalogo.Domain;
 using ProjectStore.Core.Data;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using TestStore.Catalogo.Domain;
 
 namespace ProjectStore.Catalogo.Data
 {

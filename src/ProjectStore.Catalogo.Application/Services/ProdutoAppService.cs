@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using ProjectStore.Catalogo.Application.ViewModels;
+using ProjectStore.Catalogo.Domain;
 using ProjectStore.Catalogo.Domain.Interfaces;
+using ProjectStore.Core.DomainObjects;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TestStore.Catalogo.Domain;
-using TestStore.Core.DomainObjects;
 
 namespace ProjectStore.Catalogo.Application.Services
 {
