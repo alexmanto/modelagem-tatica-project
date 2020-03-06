@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ProjectStore.Catalogo.Application.AutoMapper;
 using ProjectStore.Catalogo.Data;
+using ProjectStore.Vendas.Data;
 using ProjectStore.WebApp.MVC.Data;
 using ProjectStore.WebApp.MVC.Setup;
 
@@ -31,6 +32,10 @@ namespace ProjectStore.WebApp.MVC
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<CatalogoContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<VendasContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 

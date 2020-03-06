@@ -1,5 +1,6 @@
 ﻿using ProjectStore.Core.DomainObjects;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectStore.Vendas.Domain.Entities
 {
@@ -9,6 +10,8 @@ namespace ProjectStore.Vendas.Domain.Entities
         public Guid ProdutoId { get; private set; }
         public string ProdutoNome { get; private set; }
         public int Quantidade { get; private set; }
+
+        [Column(TypeName = "decimal(18,2)")]
         public decimal ValorUnitario { get; private set; }
 
         // EF Rel.

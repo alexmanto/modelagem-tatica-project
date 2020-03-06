@@ -3,6 +3,7 @@ using ProjectStore.Vendas.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace ProjectStore.Vendas.Domain.Entities
@@ -13,7 +14,11 @@ namespace ProjectStore.Vendas.Domain.Entities
         public Guid ClienteId { get; private set; }
         public Guid? VoucherId { get; private set; }
         public bool VoucherUtilizado { get; private set; }
+
+        [Column(TypeName = "decimal(18,2)")]        
         public decimal Desconto { get; private set; }
+        
+        [Column(TypeName = "decimal(18,2)")]
         public decimal ValorTotal { get; private set; }
         public DateTime DataCadastro { get; private set; }
         public PedidoStatus PedidoStatus { get; private set; }
@@ -165,7 +170,7 @@ namespace ProjectStore.Vendas.Domain.Entities
 
         public static class PedidoFactory
         {
-            public static Pedido NovoPedidoRascunho(Guid clienteId)
+            public static Pedido NewPedidoRascunho(Guid clienteId)
             {
                 var pedido = new Pedido
                 {

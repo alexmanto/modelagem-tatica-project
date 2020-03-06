@@ -8,6 +8,9 @@ using ProjectStore.Catalogo.Domain.Interfaces;
 using ProjectStore.Catalogo.Domain.Services;
 using ProjectStore.Core.MediatorBus;
 using ProjectStore.Vendas.Application.Commands;
+using ProjectStore.Vendas.Data;
+using ProjectStore.Vendas.Data.Repository;
+using ProjectStore.Vendas.Domain.Interfaces;
 
 namespace ProjectStore.WebApp.MVC.Setup
 {
@@ -16,7 +19,7 @@ namespace ProjectStore.WebApp.MVC.Setup
         public static void RegisterServices(this IServiceCollection services)
         {
             // Domain Bus (Mediator)
-            services.AddScoped<IMediatrHandler, MediatrHandler>();
+            services.AddScoped<IMediatorHandler, MediatorHandler>();
 
             // Catálogo
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
@@ -27,6 +30,9 @@ namespace ProjectStore.WebApp.MVC.Setup
             services.AddScoped<INotificationHandler<ProdutoAbaixoEstoqueEvent>, ProdutoEventHandler>();
 
             // Vendas
+            services.AddScoped<IPedidoRepository, PedidoRepository>();
+            services.AddScoped<VendasContext>();
+
             services.AddScoped<IRequestHandler<AdicionarItemPedidoCommand, bool>, PedidoCommandHandler>();
         }
     }

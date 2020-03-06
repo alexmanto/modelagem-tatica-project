@@ -17,7 +17,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
   </ItemGroup>
 
@@ -28,6 +31,7 @@
     <ProjectReference Include="..\ProjectStore.Catalogo.Domain\ProjectStore.Catalogo.Domain.csproj" />
     <ProjectReference Include="..\ProjectStore.Core\ProjectStore.Core.csproj" />
     <ProjectReference Include="..\ProjectStore.Vendas.Application\ProjectStore.Vendas.Application.csproj" />
+    <ProjectReference Include="..\ProjectStore.Vendas.Data\ProjectStore.Vendas.Data.csproj" />
   </ItemGroup>
 
 
