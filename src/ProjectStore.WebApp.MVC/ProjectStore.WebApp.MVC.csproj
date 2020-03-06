@@ -27,6 +27,7 @@
     <ProjectReference Include="..\ProjectStore.Catalogo.Application\ProjectStore.Catalogo.Application.csproj" />
     <ProjectReference Include="..\ProjectStore.Catalogo.Domain\ProjectStore.Catalogo.Domain.csproj" />
     <ProjectReference Include="..\ProjectStore.Core\ProjectStore.Core.csproj" />
+    <ProjectReference Include="..\ProjectStore.Vendas.Application\ProjectStore.Vendas.Application.csproj" />
   </ItemGroup>
 
 

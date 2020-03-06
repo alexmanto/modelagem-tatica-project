@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Events\" />
+    <Folder Include="Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectStore.Core\ProjectStore.Core.csproj" />
+    <ProjectReference Include="..\ProjectStore.Vendas.Domain\ProjectStore.Vendas.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

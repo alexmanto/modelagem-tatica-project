@@ -7,6 +7,7 @@ using ProjectStore.Catalogo.Domain.Events;
 using ProjectStore.Catalogo.Domain.Interfaces;
 using ProjectStore.Catalogo.Domain.Services;
 using ProjectStore.Core.MediatorBus;
+using ProjectStore.Vendas.Application.Commands;
 
 namespace ProjectStore.WebApp.MVC.Setup
 {
@@ -24,6 +25,9 @@ namespace ProjectStore.WebApp.MVC.Setup
             services.AddScoped<CatalogoContext>();
 
             services.AddScoped<INotificationHandler<ProdutoAbaixoEstoqueEvent>, ProdutoEventHandler>();
+
+            // Vendas
+            services.AddScoped<IRequestHandler<AdicionarItemPedidoCommand, bool>, PedidoCommandHandler>();
         }
     }
 }
