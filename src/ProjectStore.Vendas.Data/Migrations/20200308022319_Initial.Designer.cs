@@ -10,8 +10,8 @@ using ProjectStore.Vendas.Data;
 namespace ProjectStore.Vendas.Data.Migrations
 {
     [DbContext(typeof(VendasContext))]
-    [Migration("20200306042500_VendasContext")]
-    partial class VendasContext
+    [Migration("20200308022319_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
