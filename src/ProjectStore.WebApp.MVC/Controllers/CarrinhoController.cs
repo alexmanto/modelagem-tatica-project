@@ -51,8 +51,7 @@ namespace ProjectStore.WebApp.MVC.Controllers
             if (OperacaoValida())
                 return RedirectToAction("Index");
 
-            //TempData["Erros"] = GetMensagensErro();
-            TempData["Erros"] = "Produto indisponível";
+            TempData["Erros"] = GetMensagensErro();
             return RedirectToAction("ProdutoDetalhe", "Vitrine", new { id });
         }
 
