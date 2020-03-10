@@ -1,4 +1,4 @@
-﻿using ProjectStore.Core.DomainObjects;
+﻿using ProjectStore.Core.Messages.CommonMessages.DomainEvents;
 using System;
 
 namespace ProjectStore.Catalogo.Domain.Events

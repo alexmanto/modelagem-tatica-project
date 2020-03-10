@@ -2,7 +2,6 @@
 using ProjectStore.Vendas.Domain.Enums;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
@@ -15,9 +14,9 @@ namespace ProjectStore.Vendas.Domain.Entities
         public Guid? VoucherId { get; private set; }
         public bool VoucherUtilizado { get; private set; }
 
-        [Column(TypeName = "decimal(18,2)")]        
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Desconto { get; private set; }
-        
+
         [Column(TypeName = "decimal(18,2)")]
         public decimal ValorTotal { get; private set; }
         public DateTime DataCadastro { get; private set; }

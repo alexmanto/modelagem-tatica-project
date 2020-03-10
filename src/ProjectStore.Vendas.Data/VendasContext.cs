@@ -1,11 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProjectStore.Core.Communication.Mediator;
 using ProjectStore.Core.Data;
-using ProjectStore.Core.MediatorBus;
 using ProjectStore.Vendas.Domain.Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjectStore.Vendas.Data

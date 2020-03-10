@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ProjectStore.Catalogo.Application.Services;
-using ProjectStore.Core.MediatorBus;
+using ProjectStore.Core.Communication.Mediator;
+using ProjectStore.Core.Messages.CommonMessages.Notifications;
 using ProjectStore.Vendas.Application.Commands;
+using System;
+using System.Threading.Tasks;
 
 namespace ProjectStore.WebApp.MVC.Controllers
 {
@@ -16,10 +15,10 @@ namespace ProjectStore.WebApp.MVC.Controllers
         //private readonly IPedidoQueries _pedidoQueries;
         private readonly IMediatorHandler _mediatorHandler;
 
-        public CarrinhoController(/*INotificationHandler<DomainNotification> notifications,*/
+        public CarrinhoController(INotificationHandler<DomainNotification> notifications,
                                   IProdutoAppService produtoAppService,
                                   IMediatorHandler mediatorHandler
-                                  /*IPedidoQueries pedidoQueries*/) //: base(notifications, mediatorHandler)
+                                  /*IPedidoQueries pedidoQueries*/) : base(notifications, mediatorHandler)
         {
             _produtoAppService = produtoAppService;
             _mediatorHandler = mediatorHandler;
@@ -49,10 +48,8 @@ namespace ProjectStore.WebApp.MVC.Controllers
             var command = new AdicionarItemPedidoCommand(ClienteId, produto.Id, produto.Nome, quantidade, produto.Valor);
             await _mediatorHandler.SendCommand(command);
 
-            //if (OperacaoValida())
-            //{
-            //    return RedirectToAction("Index");
-            //}
+            if (OperacaoValida())
+                return RedirectToAction("Index");
 
             //TempData["Erros"] = GetMensagensErro();
             TempData["Erros"] = "Produto indisponível";

@@ -1,6 +1,6 @@
 ﻿using ProjectStore.Catalogo.Domain.Events;
 using ProjectStore.Catalogo.Domain.Interfaces;
-using ProjectStore.Core.MediatorBus;
+using ProjectStore.Core.Communication.Mediator;
 using System;
 using System.Threading.Tasks;
 

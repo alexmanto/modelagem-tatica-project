@@ -6,7 +6,8 @@ using ProjectStore.Catalogo.Data.Repositories;
 using ProjectStore.Catalogo.Domain.Events;
 using ProjectStore.Catalogo.Domain.Interfaces;
 using ProjectStore.Catalogo.Domain.Services;
-using ProjectStore.Core.MediatorBus;
+using ProjectStore.Core.Communication.Mediator;
+using ProjectStore.Core.Messages.CommonMessages.Notifications;
 using ProjectStore.Vendas.Application.Commands;
 using ProjectStore.Vendas.Data;
 using ProjectStore.Vendas.Data.Repository;
@@ -18,8 +19,11 @@ namespace ProjectStore.WebApp.MVC.Setup
     {
         public static void RegisterServices(this IServiceCollection services)
         {
-            // Domain Bus (Mediator)
+            // Mediator
             services.AddScoped<IMediatorHandler, MediatorHandler>();
+
+            // Notifications
+            services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
 
             // Catálogo
             services.AddScoped<IProdutoRepository, ProdutoRepository>();

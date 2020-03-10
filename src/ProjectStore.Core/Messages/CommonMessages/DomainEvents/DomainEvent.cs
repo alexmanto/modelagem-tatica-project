@@ -1,7 +1,6 @@
-﻿using ProjectStore.Core.Messages;
-using System;
+﻿using System;
 
-namespace ProjectStore.Core.DomainObjects
+namespace ProjectStore.Core.Messages.CommonMessages.DomainEvents
 {
     public class DomainEvent : Event
     {
