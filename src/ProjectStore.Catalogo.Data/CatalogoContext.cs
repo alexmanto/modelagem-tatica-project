@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjectStore.Catalogo.Domain;
 using ProjectStore.Core.Data;
+using ProjectStore.Core.Messages;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,6 +24,8 @@ namespace ProjectStore.Catalogo.Data
             {
                 property.SetColumnType("varchar(100)");
             }
+
+            modelBuilder.Ignore<Event>();
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogoContext).Assembly);
         }

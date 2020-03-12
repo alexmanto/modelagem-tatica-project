@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjectStore.Core.Communication.Mediator;
 using ProjectStore.Core.Data;
+using ProjectStore.Core.Messages;
 using ProjectStore.Vendas.Domain.Entities;
 using System;
 using System.Linq;
@@ -27,18 +28,14 @@ namespace ProjectStore.Vendas.Data
             foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("DataCadastro") != null))
             {
                 if (entry.State == EntityState.Added)
-                {
                     entry.Property("DataCadastro").CurrentValue = DateTime.Now;
-                }
 
                 if (entry.State == EntityState.Modified)
-                {
                     entry.Property("DataCadastro").IsModified = false;
-                }
             }
 
             var sucesso = await base.SaveChangesAsync() > 0;
-            //if (sucesso) await _mediatorHandler.PublishEvent(this);
+            if (sucesso) await _mediatorHandler.PublishEvents(this);
 
             return sucesso;
         }
@@ -51,7 +48,7 @@ namespace ProjectStore.Vendas.Data
                 property.SetColumnType("varchar(100)");
             }
 
-            //modelBuilder.Ignore<Event>();
+            modelBuilder.Ignore<Event>();
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(VendasContext).Assembly);
 

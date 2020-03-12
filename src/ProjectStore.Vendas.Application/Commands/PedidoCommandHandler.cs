@@ -2,6 +2,7 @@
 using ProjectStore.Core.Communication.Mediator;
 using ProjectStore.Core.Messages;
 using ProjectStore.Core.Messages.CommonMessages.Notifications;
+using ProjectStore.Vendas.Application.Events;
 using ProjectStore.Vendas.Domain.Entities;
 using ProjectStore.Vendas.Domain.Interfaces;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace ProjectStore.Vendas.Application.Commands
                 pedido.AddItem(pedidoItem);
 
                 _pedidoRepository.Add(pedido);
-                //pedido.AddEvento(new PedidoRascunhoIniciadoEvent(message.ClienteId, message.ProdutoId));
+                pedido.AddEvent(new PedidoRascunhoIniciadoEvent(message.ClienteId, message.ProdutoId));
             }
             else
             {
@@ -43,24 +44,16 @@ namespace ProjectStore.Vendas.Application.Commands
                 pedido.AddItem(pedidoItem);
 
                 if (pedidoItemExistente)
-                {
                     _pedidoRepository.UpdateItem(pedido.PedidoItems.FirstOrDefault(p => p.ProdutoId == pedidoItem.ProdutoId));
-                }
                 else
-                {
                     _pedidoRepository.AddItem(pedidoItem);
-                }
 
-                //pedido.AddEvento(new PedidoAtualizadoEvent(pedido.ClienteId, pedido.Id, pedido.ValorTotal));
+                pedido.AddEvent(new PedidoAtualizadoEvent(pedido.ClienteId, pedido.Id, pedido.ValorTotal));
             }
 
-            //pedido.AddEvento(new PedidoItemAdicionadoEvent(pedido.ClienteId, pedido.Id, message.ProdutoId, message.Nome, message.ValorUnitario, message.Quantidade));
+            pedido.AddEvent(new PedidoItemAdicionadoEvent(pedido.ClienteId, pedido.Id, message.ProdutoId, message.Nome, message.ValorUnitario, message.Quantidade));
             return await _pedidoRepository.UnitOfWork.Commit();
         }
-
-
-
-
 
         private bool ValidateCommand(Command message)
         {
