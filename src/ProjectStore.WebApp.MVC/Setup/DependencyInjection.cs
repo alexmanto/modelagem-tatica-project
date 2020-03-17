@@ -10,6 +10,7 @@ using ProjectStore.Core.Communication.Mediator;
 using ProjectStore.Core.Messages.CommonMessages.Notifications;
 using ProjectStore.Vendas.Application.Commands;
 using ProjectStore.Vendas.Application.Events;
+using ProjectStore.Vendas.Application.Queries;
 using ProjectStore.Vendas.Data;
 using ProjectStore.Vendas.Data.Repository;
 using ProjectStore.Vendas.Domain.Interfaces;
@@ -38,6 +39,7 @@ namespace ProjectStore.WebApp.MVC.Setup
             services.AddScoped<IRequestHandler<AdicionarItemPedidoCommand, bool>, PedidoCommandHandler>();
             services.AddScoped<IPedidoRepository, PedidoRepository>();
             services.AddScoped<VendasContext>();
+            services.AddScoped<IPedidoQueries, PedidoQueries>();
 
             services.AddScoped<INotificationHandler<PedidoRascunhoIniciadoEvent>, PedidoEventHandler>();
             services.AddScoped<INotificationHandler<PedidoAtualizadoEvent>, PedidoEventHandler>();

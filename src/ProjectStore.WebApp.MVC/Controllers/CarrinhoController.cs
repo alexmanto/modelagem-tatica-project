@@ -4,6 +4,7 @@ using ProjectStore.Catalogo.Application.Services;
 using ProjectStore.Core.Communication.Mediator;
 using ProjectStore.Core.Messages.CommonMessages.Notifications;
 using ProjectStore.Vendas.Application.Commands;
+using ProjectStore.Vendas.Application.Queries;
 using System;
 using System.Threading.Tasks;
 
@@ -12,29 +13,28 @@ namespace ProjectStore.WebApp.MVC.Controllers
     public class CarrinhoController : ControllerBase
     {
         private readonly IProdutoAppService _produtoAppService;
-        //private readonly IPedidoQueries _pedidoQueries;
+        private readonly IPedidoQueries _pedidoQueries;
         private readonly IMediatorHandler _mediatorHandler;
 
         public CarrinhoController(INotificationHandler<DomainNotification> notifications,
                                   IProdutoAppService produtoAppService,
-                                  IMediatorHandler mediatorHandler
-                                  /*IPedidoQueries pedidoQueries*/) : base(notifications, mediatorHandler)
+                                  IMediatorHandler mediatorHandler,
+                                  IPedidoQueries pedidoQueries) : base(notifications, mediatorHandler)
         {
             _produtoAppService = produtoAppService;
             _mediatorHandler = mediatorHandler;
-            //_pedidoQueries = pedidoQueries;
+            _pedidoQueries = pedidoQueries;
         }
 
         [Route("meu-carrinho")]
         public async Task<IActionResult> Index()
         {
-            //return View(await _pedidoQueries.ObterCarrinhoCliente(ClienteId));
-            return null;
+            return View(await _pedidoQueries.GetCarrinhoCliente(ClienteId));
         }
 
         [HttpPost]
         [Route("meu-carrinho")]
-        public async Task<IActionResult> AddItem(Guid id, int quantidade)
+        public async Task<IActionResult> AdicionarItem(Guid id, int quantidade)
         {
             var produto = await _produtoAppService.GetById(id);
             if (produto == null) return BadRequest();
