@@ -21,7 +21,8 @@ namespace ProjectStore.Vendas.Data
                 .ForEach(entity => entity.Entity.ClearEvents());
 
             var tasks = domainEvents
-                .Select(async (domainEvent) => {
+                .Select(async (domainEvent) =>
+                {
                     await mediator.PublishEvent(domainEvent);
                 });
 

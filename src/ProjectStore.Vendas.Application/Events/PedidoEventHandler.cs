@@ -9,9 +9,9 @@ namespace ProjectStore.Vendas.Application.Events
         INotificationHandler<PedidoRascunhoIniciadoEvent>,
         INotificationHandler<PedidoAtualizadoEvent>,
         INotificationHandler<PedidoItemAdicionadoEvent>
-        //INotificationHandler<PedidoEstoqueRejeitadoEvent>,
-        //INotificationHandler<PagamentoRealizadoEvent>,
-        //INotificationHandler<PagamentoRecusadoEvent>
+    //INotificationHandler<PedidoEstoqueRejeitadoEvent>,
+    //INotificationHandler<PagamentoRealizadoEvent>,
+    //INotificationHandler<PagamentoRecusadoEvent>
     {
 
         private readonly IMediatorHandler _mediatorHandler;
