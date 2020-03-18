@@ -1,4 +1,5 @@
-﻿using ProjectStore.Core.DomainObjects;
+﻿using FluentValidation.Results;
+using ProjectStore.Core.DomainObjects;
 using ProjectStore.Vendas.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -42,17 +43,17 @@ namespace ProjectStore.Vendas.Domain.Entities
             _pedidoItems = new List<PedidoItem>();
         }
 
-        //public ValidationResult AplicarVoucher(Voucher voucher)
-        //{
-        //    var validationResult = voucher.ValidarSeAplicavel();
-        //    if (!validationResult.IsValid) return validationResult;
+        public ValidationResult AplicarVoucher(Voucher voucher)
+        {
+            var validationResult = voucher.ValidarSeAplicavel();
+            if (!validationResult.IsValid) return validationResult;
 
-        //    Voucher = voucher;
-        //    VoucherUtilizado = true;
-        //    CalcularValorPedido();
+            Voucher = voucher;
+            VoucherUtilizado = true;
+            CalcularValorPedido();
 
-        //    return validationResult;
-        //}
+            return validationResult;
+        }
 
         public void CalcularValorPedido()
         {
@@ -102,7 +103,7 @@ namespace ProjectStore.Vendas.Domain.Entities
             if (PedidoItemExistente(item))
             {
                 var itemExistente = _pedidoItems.FirstOrDefault(p => p.ProdutoId == item.ProdutoId);
-                itemExistente.AddUnidades(item.Quantidade);
+                //itemExistente.AddUnidades(item.Quantidade);
                 item = itemExistente;
 
                 _pedidoItems.Remove(itemExistente);

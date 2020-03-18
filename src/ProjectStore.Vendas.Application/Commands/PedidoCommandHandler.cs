@@ -87,7 +87,7 @@ namespace ProjectStore.Vendas.Application.Commands
             pedido.UpdateUnidades(pedidoItem, message.Quantidade);
 
             pedido.AddEvent(new PedidoAtualizadoEvent(pedido.ClienteId, pedido.Id, pedido.ValorTotal));
-            //pedido.AddEvent(new PedidoProdutoAtualizadoEvent(message.ClienteId, pedido.Id, message.ProdutoId, message.Quantidade));
+            pedido.AddEvent(new PedidoProdutoAtualizadoEvent(message.ClienteId, pedido.Id, message.ProdutoId, message.Quantidade));
 
             _pedidoRepository.UpdateItem(pedidoItem);
             _pedidoRepository.Update(pedido);
@@ -117,7 +117,7 @@ namespace ProjectStore.Vendas.Application.Commands
 
             pedido.RemoveItem(pedidoItem);
             pedido.AddEvent(new PedidoAtualizadoEvent(pedido.ClienteId, pedido.Id, pedido.ValorTotal));
-            //pedido.AddEvent(new PedidoProdutoRemovidoEvent(message.ClienteId, pedido.Id, message.ProdutoId));
+            pedido.AddEvent(new PedidoProdutoRemovidoEvent(message.ClienteId, pedido.Id, message.ProdutoId));
 
             _pedidoRepository.RemoveItem(pedidoItem);
             _pedidoRepository.Update(pedido);
@@ -145,19 +145,19 @@ namespace ProjectStore.Vendas.Application.Commands
                 return false;
             }
 
-            //var voucherAplicacaoValidation = pedido.AplicarVoucher(voucher);
-            //if (!voucherAplicacaoValidation.IsValid)
-            //{
-            //    foreach (var error in voucherAplicacaoValidation.Errors)
-            //    {
-            //        await _mediatorHandler.PublishNotification(new DomainNotification(error.ErrorCode, error.ErrorMessage));
-            //    }
+            var voucherAplicacaoValidation = pedido.AplicarVoucher(voucher);
+            if (!voucherAplicacaoValidation.IsValid)
+            {
+                foreach (var error in voucherAplicacaoValidation.Errors)
+                {
+                    await _mediatorHandler.PublishNotification(new DomainNotification(error.ErrorCode, error.ErrorMessage));
+                }
 
-            //    return false;
-            //}
+                return false;
+            }
 
             pedido.AddEvent(new PedidoAtualizadoEvent(pedido.ClienteId, pedido.Id, pedido.ValorTotal));
-            //pedido.AddEvent(new VoucherAplicadoPedidoEvent(message.ClienteId, pedido.Id, voucher.Id));
+            pedido.AddEvent(new VoucherAplicadoPedidoEvent(message.ClienteId, pedido.Id, voucher.Id));
 
             _pedidoRepository.Update(pedido);
 
