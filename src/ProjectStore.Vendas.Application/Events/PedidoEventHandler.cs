@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using ProjectStore.Core.Communication.Mediator;
+using ProjectStore.Core.Messages.CommonMessages.IntegrationEvents;
+using ProjectStore.Vendas.Application.Commands;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,8 +10,8 @@ namespace ProjectStore.Vendas.Application.Events
     public class PedidoEventHandler :
         INotificationHandler<PedidoRascunhoIniciadoEvent>,
         INotificationHandler<PedidoAtualizadoEvent>,
-        INotificationHandler<PedidoItemAdicionadoEvent>
-    //INotificationHandler<PedidoEstoqueRejeitadoEvent>,
+        INotificationHandler<PedidoItemAdicionadoEvent>,
+        INotificationHandler<PedidoEstoqueRejeitadoEvent>
     //INotificationHandler<PagamentoRealizadoEvent>,
     //INotificationHandler<PagamentoRecusadoEvent>
     {
@@ -36,10 +38,10 @@ namespace ProjectStore.Vendas.Application.Events
             return Task.CompletedTask;
         }
 
-        //public async Task Handle(PedidoEstoqueRejeitadoEvent message, CancellationToken cancellationToken)
-        //{
-        //    await _mediatorHandler.SendCommand(new CancelarProcessamentoPedidoCommand(message.PedidoId, message.ClienteId));
-        //}
+        public async Task Handle(PedidoEstoqueRejeitadoEvent message, CancellationToken cancellationToken)
+        {
+            await _mediatorHandler.SendCommand(new CancelarProcessamentoPedidoCommand(message.PedidoId, message.ClienteId));
+        }
 
         //public async Task Handle(PagamentoRealizadoEvent message, CancellationToken cancellationToken)
         //{

@@ -5,6 +5,7 @@ using ProjectStore.Core.Communication.Mediator;
 using ProjectStore.Core.Messages.CommonMessages.Notifications;
 using ProjectStore.Vendas.Application.Commands;
 using ProjectStore.Vendas.Application.Queries;
+using ProjectStore.Vendas.Application.Queries.ViewModels;
 using System;
 using System.Threading.Tasks;
 
@@ -106,29 +107,29 @@ namespace ProjectStore.WebApp.MVC.Controllers
             return View("Index", await _pedidoQueries.GetCarrinhoCliente(ClienteId));
         }
 
-        //[Route("resumo-da-compra")]
-        //public async Task<IActionResult> ResumoDaCompra()
-        //{
-        //    return View(await _pedidoQueries.ObterCarrinhoCliente(ClienteId));
-        //}
+        [Route("resumo-da-compra")]
+        public async Task<IActionResult> ResumoDaCompra()
+        {
+            return View(await _pedidoQueries.GetCarrinhoCliente(ClienteId));
+        }
 
-        //[HttpPost]
-        //[Route("iniciar-pedido")]
-        //public async Task<IActionResult> IniciarPedido(CarrinhoViewModel carrinhoViewModel)
-        //{
-        //    var carrinho = await _pedidoQueries.ObterCarrinhoCliente(ClienteId);
+        [HttpPost]
+        [Route("iniciar-pedido")]
+        public async Task<IActionResult> IniciarPedido(CarrinhoDTO carrinhoViewModel)
+        {
+            var carrinho = await _pedidoQueries.GetCarrinhoCliente(ClienteId);
 
-        //    var command = new IniciarPedidoCommand(carrinho.PedidoId, ClienteId, carrinho.ValorTotal, carrinhoViewModel.Pagamento.NomeCartao,
-        //        carrinhoViewModel.Pagamento.NumeroCartao, carrinhoViewModel.Pagamento.ExpiracaoCartao, carrinhoViewModel.Pagamento.CvvCartao);
+            var command = new IniciarPedidoCommand(carrinho.PedidoId, ClienteId, carrinho.ValorTotal, carrinhoViewModel.Pagamento.NomeCartao,
+                carrinhoViewModel.Pagamento.NumeroCartao, carrinhoViewModel.Pagamento.ExpiracaoCartao, carrinhoViewModel.Pagamento.CvvCartao);
 
-        //    await _mediatorHandler.SendCommand(command);
+            await _mediatorHandler.SendCommand(command);
 
-        //    if (OperacaoValida())
-        //    {
-        //        return RedirectToAction("Index", "Pedido");
-        //    }
+            if (OperacaoValida())
+            {
+                return RedirectToAction("Index", "Pedido");
+            }
 
-        //    return View("ResumoDaCompra", await _pedidoQueries.ObterCarrinhoCliente(ClienteId));
-        //}
+            return View("ResumoDaCompra", await _pedidoQueries.GetCarrinhoCliente(ClienteId));
+        }
     }
 }

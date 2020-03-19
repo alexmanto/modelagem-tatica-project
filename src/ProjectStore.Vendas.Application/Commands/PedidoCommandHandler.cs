@@ -1,10 +1,14 @@
 ﻿using MediatR;
 using ProjectStore.Core.Communication.Mediator;
+using ProjectStore.Core.DomainObjects.DTO;
+using ProjectStore.Core.Extensions;
 using ProjectStore.Core.Messages;
+using ProjectStore.Core.Messages.CommonMessages.IntegrationEvents;
 using ProjectStore.Core.Messages.CommonMessages.Notifications;
 using ProjectStore.Vendas.Application.Events;
 using ProjectStore.Vendas.Domain.Entities;
 using ProjectStore.Vendas.Domain.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,11 +19,11 @@ namespace ProjectStore.Vendas.Application.Commands
         IRequestHandler<AdicionarItemPedidoCommand, bool>,
         IRequestHandler<AtualizarItemPedidoCommand, bool>,
         IRequestHandler<RemoverItemPedidoCommand, bool>,
-        IRequestHandler<AplicarVoucherPedidoCommand, bool>
-        //IRequestHandler<IniciarPedidoCommand, bool>,
-        //IRequestHandler<FinalizarPedidoCommand, bool>,
-        //IRequestHandler<CancelarProcessamentoPedidoEstornarEstoqueCommand, bool>,
-        //IRequestHandler<CancelarProcessamentoPedidoCommand, bool>
+        IRequestHandler<AplicarVoucherPedidoCommand, bool>,
+        IRequestHandler<IniciarPedidoCommand, bool>
+    //IRequestHandler<FinalizarPedidoCommand, bool>,
+    //IRequestHandler<CancelarProcessamentoPedidoEstornarEstoqueCommand, bool>,
+    //IRequestHandler<CancelarProcessamentoPedidoCommand, bool>
 
     {
         private readonly IPedidoRepository _pedidoRepository;
@@ -161,6 +165,23 @@ namespace ProjectStore.Vendas.Application.Commands
 
             _pedidoRepository.Update(pedido);
 
+            return await _pedidoRepository.UnitOfWork.Commit();
+        }
+
+        public async Task<bool> Handle(IniciarPedidoCommand message, CancellationToken cancellationToken)
+        {
+            if (!ValidateCommand(message)) return false;
+
+            var pedido = await _pedidoRepository.GetPedidoRascunhoByClienteId(message.ClienteId);
+            pedido.IniciarPedido();
+
+            var itensList = new List<Item>();
+            pedido.PedidoItems.ForEach(i => itensList.Add(new Item { Id = i.ProdutoId, Quantidade = i.Quantidade }));
+            var listaProdutosPedido = new ListaProdutosPedido { PedidoId = pedido.Id, Itens = itensList };
+
+            pedido.AddEvent(new PedidoIniciadoEvent(pedido.Id, pedido.ClienteId, listaProdutosPedido, pedido.ValorTotal, message.NomeCartao, message.NumeroCartao, message.ExpiracaoCartao, message.CvvCartao));
+
+            _pedidoRepository.Update(pedido);
             return await _pedidoRepository.UnitOfWork.Commit();
         }
 
