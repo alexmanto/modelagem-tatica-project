@@ -26,6 +26,9 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ProjectStore.Pagamentos.AntiCorruption\ProjectStore.Pagamentos.AntiCorruption.csproj" />
+    <ProjectReference Include="..\..\ProjectStore.Pagamentos.Business\ProjectStore.Pagamentos.Business.csproj" />
+    <ProjectReference Include="..\..\ProjectStore.Pagamentos.Data\ProjectStore.Pagamentos.Data.csproj" />
     <ProjectReference Include="..\ProjectStore.Catalogo.Data\ProjectStore.Catalogo.Data.csproj" />
     <ProjectReference Include="..\ProjectStore.Catalogo.Application\ProjectStore.Catalogo.Application.csproj" />
     <ProjectReference Include="..\ProjectStore.Catalogo.Domain\ProjectStore.Catalogo.Domain.csproj" />

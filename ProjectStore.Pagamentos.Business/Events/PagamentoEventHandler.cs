@@ -1,4 +1,11 @@
-﻿namespace ProjectStore.Pagamentos.Business.Events
+﻿using MediatR;
+using ProjectStore.Core.DomainObjects.DTO;
+using ProjectStore.Core.Messages.CommonMessages.IntegrationEvents;
+using ProjectStore.Pagamentos.Business.Interfaces;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace ProjectStore.Pagamentos.Business.Events
 {
     public class PagamentoEventHandler : INotificationHandler<PedidoEstoqueConfirmadoEvent>
     {

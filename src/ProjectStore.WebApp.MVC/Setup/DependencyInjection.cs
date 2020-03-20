@@ -7,7 +7,14 @@ using ProjectStore.Catalogo.Domain.Events;
 using ProjectStore.Catalogo.Domain.Interfaces;
 using ProjectStore.Catalogo.Domain.Services;
 using ProjectStore.Core.Communication.Mediator;
+using ProjectStore.Core.Messages.CommonMessages.IntegrationEvents;
 using ProjectStore.Core.Messages.CommonMessages.Notifications;
+using ProjectStore.Pagamentos.AntiCorruption;
+using ProjectStore.Pagamentos.Business;
+using ProjectStore.Pagamentos.Business.Events;
+using ProjectStore.Pagamentos.Business.Interfaces;
+using ProjectStore.Pagamentos.Data;
+using ProjectStore.Pagamentos.Data.Repository;
 using ProjectStore.Vendas.Application.Commands;
 using ProjectStore.Vendas.Application.Events;
 using ProjectStore.Vendas.Application.Queries;
@@ -34,6 +41,8 @@ namespace ProjectStore.WebApp.MVC.Setup
             services.AddScoped<CatalogoContext>();
 
             services.AddScoped<INotificationHandler<ProdutoAbaixoEstoqueEvent>, ProdutoEventHandler>();
+            services.AddScoped<INotificationHandler<PedidoIniciadoEvent>, ProdutoEventHandler>();
+            //services.AddScoped<INotificationHandler<PedidoProcessamentoCanceladoEvent>, ProdutoEventHandler>();
 
             // Vendas
             services.AddScoped<IPedidoRepository, PedidoRepository>();
@@ -53,6 +62,16 @@ namespace ProjectStore.WebApp.MVC.Setup
             //services.AddScoped<INotificationHandler<PedidoEstoqueRejeitadoEvent>, PedidoEventHandler>();
             //services.AddScoped<INotificationHandler<PagamentoRealizadoEvent>, PedidoEventHandler>();
             //services.AddScoped<INotificationHandler<PagamentoRecusadoEvent>, PedidoEventHandler>();
+
+            // Pagamento
+            services.AddScoped<IPagamentoRepository, PagamentoRepository>();
+            services.AddScoped<IPagamentoService, PagamentoService>();
+            services.AddScoped<IPagamentoCartaoCreditoFacade, PagamentoCartaoCreditoFacade>();
+            services.AddScoped<IPayPalGateway, PayPalGateway>();
+            services.AddScoped<IConfigurationManager, ConfigurationManager>();
+            services.AddScoped<PagamentoContext>();
+
+            services.AddScoped<INotificationHandler<PedidoEstoqueConfirmadoEvent>, PagamentoEventHandler>();
         }
     }
 }
