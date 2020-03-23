@@ -11,9 +11,9 @@ namespace ProjectStore.Vendas.Application.Events
         INotificationHandler<PedidoRascunhoIniciadoEvent>,
         INotificationHandler<PedidoAtualizadoEvent>,
         INotificationHandler<PedidoItemAdicionadoEvent>,
-        INotificationHandler<PedidoEstoqueRejeitadoEvent>
-    //INotificationHandler<PagamentoRealizadoEvent>,
-    //INotificationHandler<PagamentoRecusadoEvent>
+        INotificationHandler<PedidoEstoqueRejeitadoEvent>,
+        INotificationHandler<PagamentoRealizadoEvent>,
+        INotificationHandler<PagamentoRecusadoEvent>
     {
 
         private readonly IMediatorHandler _mediatorHandler;
@@ -43,14 +43,14 @@ namespace ProjectStore.Vendas.Application.Events
             await _mediatorHandler.SendCommand(new CancelarProcessamentoPedidoCommand(message.PedidoId, message.ClienteId));
         }
 
-        //public async Task Handle(PagamentoRealizadoEvent message, CancellationToken cancellationToken)
-        //{
-        //    await _mediatorHandler.SendCommand(new FinalizarPedidoCommand(message.PedidoId, message.ClienteId));
-        //}
+        public async Task Handle(PagamentoRealizadoEvent message, CancellationToken cancellationToken)
+        {
+            await _mediatorHandler.SendCommand(new FinalizarPedidoCommand(message.PedidoId, message.ClienteId));
+        }
 
-        //public async Task Handle(PagamentoRecusadoEvent message, CancellationToken cancellationToken)
-        //{
-        //    await _mediatorHandler.SendCommand(new CancelarProcessamentoPedidoEstornarEstoqueCommand(message.PedidoId, message.ClienteId));
-        //}
+        public async Task Handle(PagamentoRecusadoEvent message, CancellationToken cancellationToken)
+        {
+            await _mediatorHandler.SendCommand(new CancelarProcessamentoPedidoEstornarEstoqueCommand(message.PedidoId, message.ClienteId));
+        }
     }
 }

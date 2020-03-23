@@ -20,10 +20,10 @@ namespace ProjectStore.Vendas.Application.Commands
         IRequestHandler<AtualizarItemPedidoCommand, bool>,
         IRequestHandler<RemoverItemPedidoCommand, bool>,
         IRequestHandler<AplicarVoucherPedidoCommand, bool>,
-        IRequestHandler<IniciarPedidoCommand, bool>
-    //IRequestHandler<FinalizarPedidoCommand, bool>,
-    //IRequestHandler<CancelarProcessamentoPedidoEstornarEstoqueCommand, bool>,
-    //IRequestHandler<CancelarProcessamentoPedidoCommand, bool>
+        IRequestHandler<IniciarPedidoCommand, bool>,
+        IRequestHandler<FinalizarPedidoCommand, bool>,
+        IRequestHandler<CancelarProcessamentoPedidoEstornarEstoqueCommand, bool>,
+        IRequestHandler<CancelarProcessamentoPedidoCommand, bool>
 
     {
         private readonly IPedidoRepository _pedidoRepository;
@@ -107,7 +107,7 @@ namespace ProjectStore.Vendas.Application.Commands
 
             if (pedido == null)
             {
-                await _mediatorHandler.PublishNotification(new DomainNotification("pedido", "Pedido não encontrado!"));
+                await _mediatorHandler.PublishNotification(new DomainNotification("pedido", "Pedido não encontrado."));
                 return false;
             }
 
@@ -115,7 +115,7 @@ namespace ProjectStore.Vendas.Application.Commands
 
             if (pedidoItem != null && !pedido.PedidoItemExistente(pedidoItem))
             {
-                await _mediatorHandler.PublishNotification(new DomainNotification("pedido", "Item do pedido não encontrado!"));
+                await _mediatorHandler.PublishNotification(new DomainNotification("pedido", "Item do pedido não encontrado."));
                 return false;
             }
 
@@ -137,7 +137,7 @@ namespace ProjectStore.Vendas.Application.Commands
 
             if (pedido == null)
             {
-                await _mediatorHandler.PublishNotification(new DomainNotification("pedido", "Pedido não encontrado!"));
+                await _mediatorHandler.PublishNotification(new DomainNotification("pedido", "Pedido não encontrado."));
                 return false;
             }
 
@@ -145,7 +145,7 @@ namespace ProjectStore.Vendas.Application.Commands
 
             if (voucher == null)
             {
-                await _mediatorHandler.PublishNotification(new DomainNotification("pedido", "Voucher não encontrado!"));
+                await _mediatorHandler.PublishNotification(new DomainNotification("pedido", "Voucher não encontrado."));
                 return false;
             }
 
@@ -182,6 +182,57 @@ namespace ProjectStore.Vendas.Application.Commands
             pedido.AddEvent(new PedidoIniciadoEvent(pedido.Id, pedido.ClienteId, listaProdutosPedido, pedido.ValorTotal, message.NomeCartao, message.NumeroCartao, message.ExpiracaoCartao, message.CvvCartao));
 
             _pedidoRepository.Update(pedido);
+            return await _pedidoRepository.UnitOfWork.Commit();
+        }
+
+        public async Task<bool> Handle(FinalizarPedidoCommand message, CancellationToken cancellationToken)
+        {
+            var pedido = await _pedidoRepository.GetById(message.PedidoId);
+
+            if (pedido == null)
+            {
+                await _mediatorHandler.PublishNotification(new DomainNotification("pedido", "Pedido não encontrado."));
+                return false;
+            }
+
+            pedido.FinalizarPedido();
+
+            pedido.AddEvent(new PedidoFinalizadoEvent(message.PedidoId));
+            return await _pedidoRepository.UnitOfWork.Commit();
+        }
+
+        public async Task<bool> Handle(CancelarProcessamentoPedidoEstornarEstoqueCommand message, CancellationToken cancellationToken)
+        {
+            var pedido = await _pedidoRepository.GetById(message.PedidoId);
+
+            if (pedido == null)
+            {
+                await _mediatorHandler.PublishNotification(new DomainNotification("pedido", "Pedido não encontrado."));
+                return false;
+            }
+
+            var itensList = new List<Item>();
+            pedido.PedidoItems.ForEach(i => itensList.Add(new Item { Id = i.ProdutoId, Quantidade = i.Quantidade }));
+            var listaProdutosPedido = new ListaProdutosPedido { PedidoId = pedido.Id, Itens = itensList };
+
+            pedido.AddEvent(new PedidoProcessamentoCanceladoEvent(pedido.Id, pedido.ClienteId, listaProdutosPedido));
+            pedido.TornarRascunho();
+
+            return await _pedidoRepository.UnitOfWork.Commit();
+        }
+
+        public async Task<bool> Handle(CancelarProcessamentoPedidoCommand message, CancellationToken cancellationToken)
+        {
+            var pedido = await _pedidoRepository.GetById(message.PedidoId);
+
+            if (pedido == null)
+            {
+                await _mediatorHandler.PublishNotification(new DomainNotification("pedido", "Pedido não encontrado!"));
+                return false;
+            }
+
+            pedido.TornarRascunho();
+
             return await _pedidoRepository.UnitOfWork.Commit();
         }
 

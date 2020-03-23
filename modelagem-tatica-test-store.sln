@@ -39,11 +39,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectStore.Vendas.Applica
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectStore.Vendas.Data", "src\ProjectStore.Vendas.Data\ProjectStore.Vendas.Data.csproj", "{2D98F4E0-A758-4166-87F4-14D87FF663A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectStore.Pagamentos.AntiCorruption", "ProjectStore.Pagamentos.AntiCorruption\ProjectStore.Pagamentos.AntiCorruption.csproj", "{94DCA277-71D2-4CAF-B23B-982E81985DA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectStore.Pagamentos.AntiCorruption", "src\ProjectStore.Pagamentos.AntiCorruption\ProjectStore.Pagamentos.AntiCorruption.csproj", "{94DCA277-71D2-4CAF-B23B-982E81985DA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectStore.Pagamentos.Business", "ProjectStore.Pagamentos.Business\ProjectStore.Pagamentos.Business.csproj", "{1400A198-DFF2-4C03-A236-5552C25FB751}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectStore.Pagamentos.Business", "src\ProjectStore.Pagamentos.Business\ProjectStore.Pagamentos.Business.csproj", "{1400A198-DFF2-4C03-A236-5552C25FB751}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectStore.Pagamentos.Data", "ProjectStore.Pagamentos.Data\ProjectStore.Pagamentos.Data.csproj", "{974CB716-13EB-4DB8-81CE-8AEF3044A8F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectStore.Pagamentos.Data", "src\ProjectStore.Pagamentos.Data\ProjectStore.Pagamentos.Data.csproj", "{974CB716-13EB-4DB8-81CE-8AEF3044A8F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

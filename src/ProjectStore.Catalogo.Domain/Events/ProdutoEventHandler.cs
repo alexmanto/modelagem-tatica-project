@@ -9,8 +9,8 @@ namespace ProjectStore.Catalogo.Domain.Events
 {
     public class ProdutoEventHandler :
         INotificationHandler<ProdutoAbaixoEstoqueEvent>,
-        INotificationHandler<PedidoIniciadoEvent>
-    //INotificationHandler<PedidoProcessamentoCanceladoEvent>
+        INotificationHandler<PedidoIniciadoEvent>,
+        INotificationHandler<PedidoProcessamentoCanceladoEvent>
     {
         private readonly IProdutoRepository _produtoRepository;
         private readonly IEstoqueService _estoqueService;
@@ -46,9 +46,9 @@ namespace ProjectStore.Catalogo.Domain.Events
             }
         }
 
-        //public async Task Handle(PedidoProcessamentoCanceladoEvent message, CancellationToken cancellationToken)
-        //{
-        //    await _estoqueService.ReporListaProdutosPedido(message.ProdutosPedido);
-        //}
+        public async Task Handle(PedidoProcessamentoCanceladoEvent message, CancellationToken cancellationToken)
+        {
+            await _estoqueService.ReporListaProdutosPedido(message.ProdutosPedido);
+        }
     }
 }

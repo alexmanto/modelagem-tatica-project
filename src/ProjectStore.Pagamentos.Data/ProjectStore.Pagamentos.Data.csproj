@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ProjectStore.Pagamentos.Business\ProjectStore.Pagamentos.Business.csproj" />
-    <ProjectReference Include="..\src\ProjectStore.Core\ProjectStore.Core.csproj" />
+    <ProjectReference Include="..\ProjectStore.Core\ProjectStore.Core.csproj" />
   </ItemGroup>
 
 </Project>
